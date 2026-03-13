@@ -363,7 +363,7 @@ async function callApiAndAppend(id, userText, retryAttempt = 0) {
         <div style={{ textAlign: 'center' }}>
           <h2>Welcome to LFL Chat</h2>
           <p style={{ fontSize: 16, color: '#666', marginBottom: 30 }}>
-            Please sign in to access the chat
+            Please sign in to access the chat with AI
           </p>
           <GoogleLoginButton />
         </div>
