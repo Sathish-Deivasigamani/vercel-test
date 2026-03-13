@@ -1,0 +1,217 @@
+﻿#root {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+/* Global app styles */
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo { animation: logo-spin infinite 20s linear; }
+}
+
+.card { padding: 2em; }
+.read-the-docs { color: #888; }
+
+/* Layout for chat app */
+.app-root {
+  display: grid;
+  grid-template-columns: 273px 1fr;
+  gap: 0;
+  transition: grid-template-columns 0.3s ease;
+}
+.app-root.sidebar-closed { grid-template-columns: 60px 1fr; }
+
+.api-error {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #d9534f;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+/* Messages area */
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 20vw;
+}
+
+.sidebar.closed {
+  width: 50px;
+  overflow: hidden;
+}
+
+.sidebar.open {
+  width: 273px;
+}
+
+.sidebar-drawer-main-btn {
+  display: flex;
+}
+.sidebar-company-logo {
+  display: flex;
+  align-items: center;
+}
+.sidebar-toggle {
+  /* position: absolute; */
+  /* top: 1rem; */
+  /* left: 0.5rem; */
+
+  margin: 5px 5px auto auto;
+  width: 36px;
+  height: 36px;
+  background: var(--button-bg);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--text);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.sidebar-toggle:hover {
+  background: rgba(0,0,0,0.08);
+  transform: scale(1.05);
+}
+
+.sidebar-toggle:active {
+  transform: scale(0.95);
+}
+
+.sidebar .top {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+.mode-switch {
+    display: inline-flex;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.mode-switch button {
+  background: transparent;
+  border: none;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  color: var(--muted);
+  font-weight: 500;
+  width: 50%;
+}
+.mode-switch button.active {
+  background: var(--button-bg);
+  color: var(--text);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.mode-switch button:focus {
+  outline: none;
+}
+.mode-switch button:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+.sidebar-helper {
+  padding: 0 1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.chat-mode-btn button{
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--text);
+}
+.new-chat {
+  display: inline-flex;
+  color: var(--text);
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--button-bg);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.history {
+  margin-top: 0.75rem;
+  overflow: auto;
+  flex: 1 1 auto;
+  height: 10vh;
+}
+
+.history-item:hover {
+  background: rgba(0,0,0,0.03);
+}
+.history-item.selected {
+  background: var(--button-bg);
+}
+
+.history-item .delete-btn {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  visibility: hidden;
+}
+.history-item:hover .delete-btn { visibility: visible; }
+.history-item .delete-btn:hover { background: rgba(0,0,0,0.06); color: var(--text); }
+
+/* Chat area styles moved to src/style/ChatArea.css for better modularity */
+
+/* Keep component-specific CSS in their own files (Sidebar.css, Settings.css, ChatArea.css) */
+
+/* ===== Firefox Support ===== */
+.chat-message-section, .history { scrollbar-width: thin; scrollbar-color: #888 transparent; }
+.messages, .history {
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
+}

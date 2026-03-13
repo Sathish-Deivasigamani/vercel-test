@@ -1,0 +1,515 @@
+/* ===== CHAT AREA STYLES ===== */
+
+/* Messages area */
+.chat-message-section {
+  flex: 1;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0px 20px;
+  max-height: 70vh;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
+}
+
+.msg {
+  display: flex;
+  /* max-width: 70%; */
+}
+.user{
+  max-width: 80%;
+}
+.msg.user {
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.msg.assistant {
+  justify-content: flex-start;
+}
+
+.msg-wrapper {
+  position: relative;
+  /* display: flex; */
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.msg-body {
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: var(--text);
+  text-align: left;
+  line-height: 30px;
+}
+.user .msg-body{
+  background: var(--button-bg);
+  width: fit-content;
+  margin-left: auto;
+}
+
+/* Message action buttons (hidden by default, shown on hover) */
+.msg-actions {
+    display: flex;
+    gap: 4px;
+    margin-top: 5px;
+    justify-content: end;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+}
+
+.msg:hover .msg-actions {
+  opacity: 1;
+}
+
+/* Copy button for assistant is always visible */
+.msg-copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: all 0.15s ease;
+}
+.msg-wrapper .msg-copy-btn {
+  margin-left: 15px;
+}
+.msg-action-btn {
+  /* margin-left: 5px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: rgba(100, 108, 255, 0.1);
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.msg-action-btn:hover {
+  background: rgba(100, 108, 255, 0.2);
+  color: var(--primary, #646cff);
+  transform: scale(1.05);
+}
+
+.msg-action-btn:active {
+  transform: scale(0.95);
+}
+
+/* Edit modal styles */
+.edit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.edit-modal {
+  background: var(--bg);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.3s ease;
+  color: var(--text);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.edit-modal h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.edit-textarea {
+  width: 90%;
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: var(--button-bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.edit-textarea:focus {
+  border-color: var(--primary, #646cff);
+  box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.1);
+}
+
+.edit-modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.edit-btn-cancel,
+.edit-btn-save {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.edit-btn-cancel {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text);
+}
+
+.edit-btn-cancel:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.edit-btn-save {
+  background: var(--primary, #646cff);
+  color: white;
+}
+
+.edit-btn-save:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.3);
+}
+
+.edit-btn-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Chat input container with integrated icons */
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+  min-height: 72px;
+  /* max-width: 90%; */
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--button-bg);
+  border: none;
+  border-radius: 8px;
+  transition: box-shadow 0.2s ease;
+}
+
+.input-container:focus-within {
+  box-shadow: 0 0 0 4px rgba(100, 108, 255, 0.08);
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.input-field {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.9rem;
+  outline: none;
+  padding: 0;
+  min-width: 0;
+  resize: none;
+  font-family: inherit;
+  line-height: 1.4;
+  vertical-align: top;
+}
+
+.input-field::placeholder {
+  color: var(--muted);
+}
+
+.input-field:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* Bottom row with attachment icons and send/stop button */
+.input-bottom-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-left-icons {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.input-right-icons {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.input-icon-btn,
+.input-send-icon-btn,
+.input-stop-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.input-icon-btn:hover,
+.input-icon-btn:focus {
+  color: var(--primary, #646cff);
+  background: rgba(100, 108, 255, 0.08);
+  outline: none;
+}
+
+.input-icon-btn:active {
+  transform: scale(0.95);
+}
+
+.input-send-icon-btn {
+  color: var(--primary, #646cff);
+  background: transparent;
+  border: none;
+}
+.input-send-icon-btn:focus, .input-stop-icon-btn:focus {
+  outline: none;
+}
+
+.input-send-icon-btn:hover:not(:disabled) {
+  background: transparent;
+  transform: scale(1.05);
+}
+
+.input-send-icon-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.input-send-icon-btn:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.input-stop-icon-btn {
+  color: #d9534f;
+  background: transparent;
+  border: none;
+  border-radius: 100%;
+padding: 0px;
+}
+
+.input-stop-icon-btn:hover {
+  background: rgba(217, 83, 79, 0.12);
+  transform: scale(1.05);
+}
+
+.input-stop-icon-btn:active {
+  transform: scale(0.95);
+}
+
+.input-field::placeholder {
+  color: var(--muted);
+}
+
+.input-field:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* Chat mode button */
+/* Position the mode buttons to the right of the sidebar so they don't overlap it.
+   Use the app-root state classes to shift the control when the sidebar is open/closed. */
+.chat-mode-btn {
+  display: flex;
+}
+
+/* When the sidebar is open, move the control to sit next to the wider sidebar */
+.app-root.sidebar-open .chat-mode-btn {
+  left: calc(273px + 16px);
+}
+
+.app-root.sidebar-closed .chat-mode-btn {
+  left: calc(50px + 16px);
+}
+
+.chat-mode-btn button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: var(--button-bg);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.chat-mode-btn button .mode-icon {
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.chat-mode-btn button.active {
+  /* Active tab appearance: subtle filled pill and stronger icon color */
+  background: rgba(100,108,255,0.12);
+  border-color: rgba(100,108,255,0.12);
+  box-shadow: none;
+  color: var(--text);
+}
+
+.chat-mode-btn button.active .mode-icon {
+  color: var(--primary, #646cff);
+}
+
+/* Hover for inactive tabs: light tint */
+.chat-mode-btn button:not(.active):hover {
+  background: rgba(100,108,255,0.04);
+}
+
+/* Minimal bottom indicator for active tab to feel like a nav tab */
+/* .chat-mode-btn button.active::after {
+  content: '';
+  display: block;
+  height: 3px;
+  background: var(--primary, #646cff);
+  border-radius: 2px;
+  margin-top: 6px;
+} */
+
+/* Icon-tab variant (MUI-like) */
+.chat-mode-btn.icon-tabs {
+  padding: 0px 2%;
+  justify-content: space-between;
+  background: transparent;
+  /* width: fit-content; */
+}
+.chat-mode-btn.icon-tabs .new-chat-button-wrapper{
+  display: flex;
+  align-items: center;
+}
+.chat-mode-btn.icon-tabs .nav-tab {
+  background: transparent;
+  border: none;
+  padding: 6px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-mode-btn.icon-tabs .tab-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  color: var(--muted);
+}
+
+.chat-mode-btn.icon-tabs .nav-tab.active .tab-icon {
+  background: rgba(100,108,255,0.12);
+  color: var(--primary, #646cff);
+}
+
+.chat-mode-btn.icon-tabs .nav-tab:hover .tab-icon {
+  background: rgba(100,108,255,0.06);
+}
+
+/* accessible visually-hidden text for screen readers */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .messages {
+    padding: 0px 20px;
+    max-height: 60vh;
+  }
+
+  .msg {
+    max-width: 90%;
+  }
+
+  .input-container {
+    flex: 0 0 90%;
+  }
+
+  .input-icon-btn,
+  .input-send-icon-btn,
+  .input-stop-icon-btn {
+    width: 24px;
+    height: 24px;
+  }
+}

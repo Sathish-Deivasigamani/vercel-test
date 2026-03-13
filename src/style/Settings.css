@@ -1,0 +1,493 @@
+/* ===== SETTINGS STYLES ===== */
+
+/* Settings Modal Overlay */
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  z-index: 1000;
+}
+
+/* Settings Panel */
+.settings-panel {
+  width: 480px;
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  color: var(--text);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.settings-panel h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Settings Item Layout */
+.settings-item {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-item.settings-item-inline {
+  flex-direction: row;
+  align-items: center;
+  /* place label/value group on the left and controls (switch/select) on the right */
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.settings-item:last-of-type {
+  border-bottom: none;
+  margin-bottom: 1rem;
+  padding-bottom: 0;
+}
+
+/* Settings Item Header */
+.settings-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  gap: 0.5rem;
+}
+
+.settings-item-inline .settings-item-header {
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 100px;
+}
+
+/* Settings Label */
+.settings-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+    min-width: 0;
+}
+
+.settings-item-inline .settings-label {
+  white-space: nowrap;
+    text-align: left;
+}
+
+/* Settings Value */
+.settings-item-value {
+  font-size: 0.6rem;
+  color: var(--muted);
+ /* This line is unchanged */
+  
+  margin-left: 0.5rem;
+}
+
+/* Edit Button */
+.edit-btn {
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+  border-radius: 4px;
+}
+
+.edit-btn:hover {
+  color: var(--primary, #0066cc);
+  background: rgba(0,0,0,0.03);
+}
+
+/* Settings Item Edit Mode */
+.settings-item-edit {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+}
+
+.settings-item-inline .settings-item-edit {
+  flex: 1;
+  margin: 0;
+  width: auto;
+}
+
+.settings-item-edit input {
+  flex: 1;
+  min-width: 20px;
+  padding: 0.2rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: var(--button-bg);
+  color: var(--text);
+  font-size: 0.6rem;
+  transition: border-color 0.2s;
+}
+
+.settings-item-edit input:focus {
+  outline: none;
+  border-color: var(--primary, #0066cc);
+}
+
+/* Save Button */
+.save-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 0.5rem;
+  border: none;
+  background: transparent;
+  color: var(--primary, #0066cc);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.save-btn:hover {
+  background: rgba(100, 108, 255, 0.12);
+  transform: scale(1.05);
+}
+
+.save-btn:active {
+  transform: scale(0.95);
+}
+
+/* Close icon button in edit mode */
+.close-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.close-icon-btn:hover {
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.close-icon-btn:active {
+  transform: scale(0.95);
+}
+
+/* Toggle Switch */
+
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  /* reduced overall height to better match the smaller switch */
+  height: 16px;
+}
+
+.settings-item-inline .toggle-switch {
+  margin-top: 0;
+}
+
+.toggle-switch input {
+  display: none;
+}
+
+.toggle-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  /* half-size of previous: 60x32 -> ~30x16 */
+  width: 30px;
+  height: 16px;
+  background: #e0e0e0;
+  border-radius: 12px;
+  padding: 2px;
+  transition: background 0.3s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.toggle-label::before {
+  content: '';
+  position: absolute;
+  /* knob approx half-size */
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+  left: 2px;
+}
+
+.toggle-switch input:checked + .toggle-label {
+  background: var(--primary, #808080);
+}
+
+.toggle-switch input:checked + .toggle-label::before {
+  /* move knob to the right side of the smaller track */
+  transform: translateX(14px);
+}
+
+.toggle-status {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  margin-left: 8px;
+  letter-spacing: 0.5px;
+}
+
+.toggle-switch input:checked + .toggle-label + .toggle-status {
+  color: var(--primary, #808080);
+}
+
+/* Settings Select Dropdown */
+.settings-select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  /* remove visible border as requested */
+  border: none;
+  background: var(--button-bg);
+  color: var(--text);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+  box-shadow: none;
+}
+
+.settings-select:focus {
+  outline: none;
+  /* subtle, accessible focus ring without adding a heavy border */
+  box-shadow: 0 0 0 4px rgba(100,108,255,0.08);
+}
+
+/* Professional select appearance: remove native arrow and add custom chevron */
+.settings-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* space for custom chevron */
+  padding-right: 2rem;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%23666' d='M0 0l5 6 5-6z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 10px) center;
+  background-size: 10px 6px;
+}
+
+.settings-select option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.settings-item-inline .settings-select {
+  margin-top: 0;
+  width: 150px;
+  flex-shrink: 0;
+}
+
+.settings-item-inline .settings-select {
+  margin-top: 0;
+  width: 150px;
+  flex-shrink: 0;
+}
+
+/* Close Button */
+.close-btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  background: var(--button-bg);
+  color: var(--text);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.close-btn:hover {
+  background: var(--hover-bg, rgba(0,0,0,0.1));
+}
+
+.close-btn:active {
+  transform: scale(0.98);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .settings-panel {
+    width: 90%;
+    max-width: 100%;
+  }
+
+  .settings-item.settings-item-inline {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .settings-item-inline .settings-label {
+    margin-bottom: 0.5rem;
+  }
+
+  .settings-select {
+    width: 100%;
+    border: none;
+  }
+
+  .settings-item-inline .settings-select {
+    width: 100%;
+       border: none;
+  }
+}
+.settings-select-menu{
+  background: var(--button-bg);
+  color: var(--text);
+ border: none;
+
+}
+
+/* Inline settings when rendered inside the sidebar */
+.settings-panel-inline {
+  width: 100%;
+  background: transparent;
+  padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+  border-radius: 6px;
+  color: var(--text);
+}
+
+.settings-panel-inline h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.sidebar-settings-inline {
+  padding: 0 1rem 0.75rem 1rem;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Ensure inline settings render as a vertical stack under the title */
+.settings-panel-inline {
+  display: block;
+}
+
+.settings-panel-inline .settings-item {
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+/* When inline, force the 'inline' variant to stack vertically */
+.settings-panel-inline .settings-item.settings-item-inline {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.settings-panel-inline .settings-item-header {
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+
+.settings-panel-inline .settings-item-value,
+.settings-panel-inline .settings-item-edit {
+  width: 100%;
+}
+
+/* When rendered inline, display items as label-left / control-right */
+.settings-panel-inline.inline .settings-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  padding-top: 0.35rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+.settings-panel-inline.inline .settings-item-header {
+  flex: 0 0 80px;
+  margin-bottom: 0;
+}
+
+.settings-panel-inline.inline .settings-label {
+  white-space: nowrap;
+}
+
+.settings-panel-inline.inline .settings-item-value {
+  flex: 1 1 auto;
+  text-align: right;
+  margin-left: 0;
+  color: var(--muted);
+  overflow: hidden;
+}
+
+.settings-panel-inline.inline .settings-item-edit {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  width: auto;
+}
+
+/* Toggle and select should be compact on the right */
+.settings-panel-inline.inline .toggle-switch {
+  margin-top: 0;
+  height: auto;
+}
+
+.settings-panel-inline.inline .settings-select {
+  width: 140px;
+  margin-top: 0;
+}
+
+.settings-panel-inline.inline .settings-item-edit input {
+  min-width: 160px;
+}
+
+/* Inline variant: stack buttons under the input and reduce input width */
+.settings-panel-inline.inline .settings-item-edit.inline {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.settings-panel-inline.inline .settings-item-edit.inline input {
+  min-width: 120px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.settings-panel-inline.inline .settings-item-edit-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.settings-panel-inline.inline .save-btn,
+.settings-panel-inline.inline .close-icon-btn {
+  padding: 0.35rem 0.55rem;
+}
